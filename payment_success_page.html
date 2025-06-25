@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>¡Pago Exitoso! - Libertas AI</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        .container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            text-align: center;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.1);
+            max-width: 500px;
+            width: 100%;
+        }
+        .success-icon {
+            font-size: 80px;
+            color: #28a745;
+            margin-bottom: 20px;
+        }
+        h1 {
+            color: #2D3748;
+            margin-bottom: 10px;
+            font-size: 28px;
+        }
+        .subtitle {
+            color: #718096;
+            margin-bottom: 30px;
+            font-size: 16px;
+        }
+        .receipt {
+            background: #F7FAFC;
+            border-radius: 12px;
+            padding: 25px;
+            margin: 30px 0;
+            border-left: 4px solid #667eea;
+        }
+        .receipt-item {
+            display: flex;
+            justify-content: space-between;
+            margin: 12px 0;
+            font-size: 16px;
+        }
+        .receipt-item.total {
+            border-top: 2px solid #E2E8F0;
+            padding-top: 12px;
+            font-weight: bold;
+            color: #2D3748;
+        }
+        .credits-badge {
+            background: #667eea;
+            color: white;
+            padding: 15px 25px;
+            border-radius: 50px;
+            font-size: 18px;
+            font-weight: bold;
+            display: inline-block;
+            margin: 20px 0;
+        }
+        .telegram-button {
+            background: #0088cc;
+            color: white;
+            padding: 15px 30px;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: bold;
+            text-decoration: none;
+            display: inline-block;
+            margin-top: 20px;
+            transition: background 0.3s ease;
+        }
+        .telegram-button:hover {
+            background: #006699;
+        }
+        .footer {
+            margin-top: 30px;
+            color: #718096;
+            font-size: 14px;
+        }
+        .transaction-id {
+            font-family: 'Courier New', monospace;
+            background: #F1F5F9;
+            padding: 8px 12px;
+            border-radius: 6px;
+            color: #475569;
+            font-size: 12px;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>¡Pago Exitoso!</h1>
+        <p class="subtitle">Tu compra se ha procesado correctamente</p>
+        
+        <div class="receipt">
+            <h3 style="margin-top: 0; color: #2D3748;">Recibo de Compra</h3>
+            <div class="receipt-item">
+                <span>Producto:</span>
+                <span>Créditos Libertas AI</span>
+            </div>
+            <div class="receipt-item">
+                <span>Cantidad:</span>
+                <span id="credits-amount">50 créditos</span>
+            </div>
+            <div class="receipt-item">
+                <span>Precio:</span>
+                <span id="price-amount">$5.00 USD</span>
+            </div>
+            <div class="receipt-item">
+                <span>Método de pago:</span>
+                <span>PayPal</span>
+            </div>
+            <div class="receipt-item total">
+                <span>Total Pagado:</span>
+                <span id="total-amount">$5.00 USD</span>
+            </div>
+        </div>
+
+        <div class="credits-badge">
+            🎉 <span id="credits-earned">50 créditos</span> añadidos a tu cuenta
+        </div>
+
+        <div class="transaction-id">
+            ID de Transacción: <span id="transaction-id">TXN-XXXX-XXXX</span>
+        </div>
+
+        <a href="https://t.me/tu_bot_libertas" class="telegram-button">
+            📱 Volver a Telegram
+        </a>
+
+        <div class="footer">
+            <p><strong>Libertas AI</strong><br>
+            Tus créditos ya están disponibles.<br>
+            Puedes comenzar a usar nuestros servicios inmediatamente.</p>
+            
+            <p style="margin-top: 20px; font-size: 12px;">
+                ¿Problemas? Contacta soporte: <strong>support@libertas.ai</strong>
+            </p>
+        </div>
+    </div>
+
+    <script>
+        // Obtener parámetros de la URL
+        const urlParams = new URLSearchParams(window.location.search);
+        const credits = urlParams.get('credits') || '50';
+        const amount = urlParams.get('amount') || '5.00';
+        const txn = urlParams.get('token') || 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+        // Actualizar contenido dinámico
+        document.getElementById('credits-amount').textContent = credits + ' créditos';
+        document.getElementById('credits-earned').textContent = credits + ' créditos';
+        document.getElementById('price-amount').textContent = '$' + amount + ' USD';
+        document.getElementById('total-amount').textContent = '$' + amount + ' USD';
+        document.getElementById('transaction-id').textContent = txn;
+    </script>
+</body>
+</html>
